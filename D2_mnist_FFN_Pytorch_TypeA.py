@@ -130,6 +130,7 @@ M7. Define Loss Fumction
 '''
 
 criterion = nn.CrossEntropyLoss()
+
 '''
 M8. Define train loop
 '''

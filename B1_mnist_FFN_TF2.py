@@ -10,7 +10,7 @@ import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
 '''
-D2. Load MNIST data
+D2. Load MNIST data / Only for Toy Project
 '''
 mnist = tf.keras.datasets.mnist
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
@@ -127,7 +127,7 @@ def train_step(images, labels):
     
     train_loss(loss)
     train_accuracy(labels, predictions)
-
+    
     return loss
 
 '''
@@ -137,11 +137,11 @@ M7. Define validation / test loop
 def test_step(images, labels):
     predictions = model(images)
     t_loss = compute_loss(labels, predictions)
+    
     test_loss(t_loss)
     test_accuracy(labels, predictions)
 
     return t_loss
-
 
 '''
 M8. Define Episode / each step process

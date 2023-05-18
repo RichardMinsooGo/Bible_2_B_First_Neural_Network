@@ -7,7 +7,6 @@ D1. Import Libraries for Data Engineering
 '''
 import tensorflow as tf
 
-import matplotlib.pyplot as plt
 '''
 D2. Load MNIST data / Only for Toy Project
 '''
@@ -43,6 +42,7 @@ Y_test = to_categorical(Y_test, 10)
 '''
 D4. EDA(? / Exploratory data analysis)
 '''
+import matplotlib.pyplot as plt
 
 # plot first few images
 for i in range(9):
@@ -70,7 +70,7 @@ M2. Set Hyperparameters
 
 hidden_size = 256
 output_dim = 10      # output layer dimensionality = num_classes
-EPOCHS = 100
+EPOCHS = 30
 '''
 M3. Build NN model
 '''
@@ -83,6 +83,7 @@ model = tf.keras.models.Sequential([
 ])
 
 model.summary()
+
 '''
 M4. Optimizer
 '''
@@ -110,7 +111,7 @@ print('test_loss: {:.3f}, test_acc: {:.3f}'.format(
 ))
 
 '''
-M8. [Opt] Assess model performance
+M7. [Opt] Assess model performance
 '''
 model.evaluate(X_test,  Y_test, verbose=2)              
 

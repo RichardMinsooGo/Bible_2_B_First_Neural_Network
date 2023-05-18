@@ -23,7 +23,8 @@ mnist = tf.keras.datasets.mnist
 ##########################################################################
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
 
-# Change data type as float. If it is int type, it might cause error 
+# Change data type as float. If it is int type, it might cause error
+
 '''
 D3. Data Preprocessing
 '''
@@ -59,7 +60,7 @@ plt.show()
 '''
 D5. Build dataset
 '''
-
+batch_size = 100
 # in the case of Keras or TF2, type shall be [image_size, image_size, 1]
 # if it is RGB type, type shall be [image_size, image_size, 3]
 # For MNIST or Fashion MNIST, it need to reshape
@@ -68,10 +69,11 @@ X_test_new_axis = X_test[..., tf.newaxis]
 
 print(X_train_new_axis.shape)
     
-# 입력된 buffer_size만큼 data를 채우고 무작위로 sampling하여 새로운 data로 바꿉니다.
-# 완벽한 셔플링을 위해서는 데이터 세트의 전체 크기보다 크거나 같은 버퍼 크기가 필요합니다.
-# 만약 작은 데이터수보다 작은 buffer_size를 사용할경우,
-# 처음에 설정된 buffer_size만큼의 data안에서 임의의 셔플링이 발생합니다.
+# It fills data as much as the input buffer_size and randomly samples and replaces it with new data.
+# Perfect shuffling requires a buffer size greater than or equal to the total size of the data set.
+# If you use a buffer_size smaller than the small number of data, 
+# random shuffling occurs within the data as much as the initially set buffer_size.
+
 shuffle_size = 100000
 
 train_ds = tf.data.Dataset.from_tensor_slices(
@@ -92,6 +94,7 @@ from tensorflow.keras.layers import Flatten, Dropout
 from tensorflow.keras import optimizers
 from tensorflow.keras import losses
 from tensorflow.keras import metrics
+import numpy as np
 
 '''
 M2. Set Hyperparameters
@@ -99,9 +102,10 @@ M2. Set Hyperparameters
 
 hidden_size = 256
 output_dim = 10      # output layer dimensionality = num_classes
-EPOCHS = 100
-batch_size = 100
+EPOCHS = 30
+
 learning_rate = 0.001
+
 '''
 M3. Build NN model
 '''
@@ -157,7 +161,6 @@ def train_step(images, labels):
     train_loss(loss)
     train_accuracy(labels, predictions)
     
-
 '''
 M7. Define validation / test loop
 '''
@@ -166,7 +169,7 @@ M7. Define validation / test loop
 def test_step(images, labels):
     predictions = model(images)
     t_loss = criterion(labels, predictions)
-
+    
     test_loss(t_loss)
     test_accuracy(labels, predictions)
 

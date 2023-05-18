@@ -8,6 +8,7 @@ D1. Import Libraries for Data Engineering
 import tensorflow as tf
 
 import matplotlib.pyplot as plt
+
 '''
 D2. Load MNIST data / Only for Toy Project
 '''
@@ -32,6 +33,7 @@ D3. Data Preprocessing
 X_train, X_test = X_train / 255.0, X_test / 255.0
 
 print(Y_train[0:10])
+print(X_train.shape)
 
 '''
 D4. EDA(? / Exploratory data analysis)
@@ -76,6 +78,7 @@ model = tf.keras.models.Sequential([
 ])
 
 model.summary()
+
 '''
 M4. Optimizer
 '''
@@ -103,7 +106,7 @@ print('test_loss: {:.3f}, test_acc: {:.3f}'.format(
 ))
 
 '''
-M8. [Opt] Assess model performance
+M7. [Opt] Assess model performance
 '''
 model.evaluate(X_test,  Y_test, verbose=2)              
 
